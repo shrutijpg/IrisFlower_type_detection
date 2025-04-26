@@ -5,7 +5,7 @@ import joblib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 #from urllib.parse import quote_plus
-from bson.objectid import ObjectId
+#from bson.objectid import ObjectId
 #from urllib.parse import quote_plus
 
 # MongoDB setup
@@ -89,7 +89,7 @@ def main():
 
 
         #Saving the prediction to the mongoDB
-        input_data["Predicted Species"] = prediction
+        input_data["Predicted Species"] = predicted_species
         input_data["Model Used"] = selected_model_name
         input_data["Predicted Numerical"] = prediction_int  # Explicitly convert to int
         collection.insert_one(input_data)
