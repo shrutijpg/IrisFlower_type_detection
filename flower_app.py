@@ -5,6 +5,9 @@ import joblib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
+
+# Defining the mapping for the numerical predictions of the output
+species_mapping = {0:"Iris-Setosa",1:"Iris-versicolor",2:"Iris-virginica"}
 #Model Loading based on our selection
 
 def load_model(model_key):
@@ -63,7 +66,13 @@ def main():
         model = load_model(selected_model_name)
         prediction= predict_iris(input_data,model)
 
-        st.success(f"🔍 Predicted Iris Species: **{prediction}**")
+        #Mapping the numerical predicted value to the type name
+        predicted_species = species_mapping.get(prediction)
+
+        if predicted_species:
+            st.success(f"🔍 Predicted Iris Species: **{predicted_species}**")
+        else:
+            st.error("Error:could not map")
 
 
         #Saving the prediction to the mongoDB
