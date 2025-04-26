@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+import joblib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -15,8 +15,7 @@ def load_model(model_key):
         "Logistic Regression (OvR)" : "logistics_ovr.pkl",
         "Logistic Regression (Multinomial)":"logistics_multinomial.pkl"
     }
-    with open(file_map[model_key],"rb") as f:
-        model = pickle.load(f)
+    model = joblib.load(file_map[model_key])
     return model
 
 def predict_iris(input_data,model):
