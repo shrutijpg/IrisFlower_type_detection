@@ -88,6 +88,7 @@ def main():
         #Saving the prediction to the mongoDB
         input_data["Predicted Species"] = prediction
         input_data["Model Used"] = selected_model_name
+        input_data["Predicted Numerical"] = int(prediction)  # Explicitly convert to int
         collection.insert_one(input_data)
 
 if __name__ == "__main__":
