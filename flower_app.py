@@ -11,7 +11,7 @@ from pymongo.server_api import ServerApi
 #password = quote_plus("shruti@123")
 
 #mongodb setup
-uri = "mongodb+srv://shrutibh1001:shruti%40123@cluster0.lvxhkfu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = "mongodb+srv://shrutibh1001:shruti1234@cluster0.lvxhkfu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['iris_prediction']
 collection = db["iris_logs"]
