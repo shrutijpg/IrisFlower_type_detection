@@ -4,9 +4,14 @@ import numpy as np
 import joblib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+#from urllib.parse import quote_plus
+
+# MongoDB setup
+#username = quote_plus("shrutibh1001")
+#password = quote_plus("shruti@123")
 
 #mongodb setup
-uri = "mongodb+srv://shrutibh1001:shruti@123@cluster0.lvxhkfu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = "mongodb+srv://shrutibh1001:shruti%40123@cluster0.lvxhkfu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['iris_prediction']
 collection = db["iris_logs"]
