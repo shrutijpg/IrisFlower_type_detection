@@ -5,6 +5,8 @@ import joblib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 #from urllib.parse import quote_plus
+from bson.objectid import ObjectId
+#from urllib.parse import quote_plus
 
 # MongoDB setup
 #username = quote_plus("shrutibh1001")
@@ -74,10 +76,11 @@ def main():
         }
 
         model = load_model(selected_model_name)
-        prediction= predict_iris(input_data,model)
+        prediction_np= predict_iris(input_data,model)
+        prediction_int = int(prediction_np)
 
         #Mapping the numerical predicted value to the type name
-        predicted_species = species_mapping.get(prediction)
+        predicted_species = species_mapping.get(prediction_int)
 
         if predicted_species:
             st.success(f"🔍 Predicted Iris Species: **{predicted_species}**")
@@ -88,7 +91,7 @@ def main():
         #Saving the prediction to the mongoDB
         input_data["Predicted Species"] = prediction
         input_data["Model Used"] = selected_model_name
-        input_data["Predicted Numerical"] = int(prediction)  # Explicitly convert to int
+        input_data["Predicted Numerical"] = prediction_int  # Explicitly convert to int
         collection.insert_one(input_data)
 
 if __name__ == "__main__":
