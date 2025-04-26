@@ -5,6 +5,11 @@ import joblib
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
+#mongodb setup
+uri = "mongodb+srv://shrutibh1001:shruti@123@cluster0.lvxhkfu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+client = MongoClient(uri, server_api=ServerApi('1'))
+db = client['iris_prediction']
+collection = db["iris_logs"]
 
 # Defining the mapping for the numerical predictions of the output
 species_mapping = {0:"Iris-Setosa",1:"Iris-versicolor",2:"Iris-virginica"}
@@ -78,7 +83,7 @@ def main():
         #Saving the prediction to the mongoDB
         input_data["Predicted Species"] = prediction
         input_data["Model Used"] = selected_model_name
-        #collection.insert_one(input_data)
+        collection.insert_one(input_data)
 
 if __name__ == "__main__":
     main()
